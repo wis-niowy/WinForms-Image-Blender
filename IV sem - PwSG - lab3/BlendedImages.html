@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Windows Forms Zadanie</title>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Windows Forms</h1>
+    <h2>Mieszanie obrazów</h2>
+	<p>Kwestie nierostrzygnięte w opisie należy wzorować na działaniu podanej aplikacji</p>
+	<h3>Funkcjonalność podstawowa (zadanie na laboratoriach 4A):</h3>
+		<ul>
+		<li>Okno główne - przycisk maksymalizacji nieaktywny i brak możliwości zmiany rozmiaru okna.</li>
+		<li>Dwie kontrolki służące wyświetleniu miniaturek wczytanych obrazków. Obrazki mają być przeskalowane tak, aby w całości były widoczne w kontrolce.</li>
+		<li>Na obu kontrolkach ma być ustawiony domyślny obrazek (Pobierz: <a href="NoImage.png" target="_BLANK" class="link_alt">Obrazek</a>) wczytywany z zasobów (Resources).</li>
+		<li>Kliknięcie w dowolną z powyższych kontrolek uruchamia dialog do wyboru pliku.</li>
+			<ul>
+			<li>Domyślnie ma być ustawione filtrowanie rozszerzeń do obrazków. Ma być wyświetlony tekst "image files (*.BMP; *.JPG; *.PNG)"</li>
+			<li>Zrezygnowanie z wyboru lub wybranie niewłaściwego pliku ma być poprawnie obsłużone (program nie może przestać działać)</li>
+			<li>Wybranie nieprawidłowego obrazka ma skutkować pojawieniem się MessageBox z ikonką typu "Error"</li>
+			</ul>
+		<li>Wciśnięcie przycisku F12 ma dokonać zrzutu ekranu (Screenshot) i ustawić obraz tego rzutu:</li>
+		<ul>
+			<li>Jako obrazek w pierwszej kontrolce (z lewej), jeżeli nie załadowano w niej jeszcze obrazka</li>
+			<li>W przeciwnym przypadku: jako obrazek w drugiej kontrolce (z prawej)</li>
+			</ul>
+		<li>Po poprawnym wybraniu dwóch obrazków uaktywniony zostaje przycisk poniżej z napisem "Perform Blending"</li>
+		<li>Pod przyciskiem umieszczona jest suwak do wyboru siły blendowania - wartość pobierana z niego będzie przeskalowana do [0,1]</li>
+		<li>Suwak ma mieć 11 kresek na skali a kursor po najechaniu na niego ma zmienić się na IBeam (jak przy pisaniu tekstu w Wordzie)</li>
+		<li>Na samym dole okna pojawia się pasek postępu operacji</li>
+		<li>Wcisnięcie blendowania:</li>
+			<ul>
+			<li>Uruchamia proces blendowania bitmap, który jest przeprowadzany w wątku w tle (innym niż główny wątek UI aplikacji)</li>
+			<li>Można założyć (dla uproszczenia), że nie będzie uruchamianych więcej niż 2 operacje równocześnie </li>
+			<li>Pasek postępu raportuje w miarę na bieżąco (nie radziej niż co 5%, o ile to możliwe) postęp uruchomionej operacji (może być pierwszej lub ostatniej - w zależności jak kto woli zrobić)</li>
+			<li>Proszę opóźnić odrobinę operację np. usypiając wątek w określonych momentach celem prezentacji procesu - żeby nie trwało za szybko</li> 
+			<li>Jeżeli trwa co najmniej jedna operacja, to ma być widoczny tekst "operation in progress"</li>
+			</ul>
+		<li>Proces blendowania:</li>
+			<ul>
+			<li>Wynikiem jest bitmapa o największych rozmiarach, które mieszczą się w obu bitmapach wejściowych </li>
+			<li>Niech alfa oznacza liczbę z przedziału [0,1] ustawioną przy pomocy suwaka </li>
+			<li>Kolor piksela o współrzędnych (i,j) wynikowej bitmapy to interpolacja liniowa kolorów bitmap wejściowych z parametrem alfa (alfa*kolor1(i,j) + (1-alfa)*kolor2(i,j))</li>
+			</ul>
+		<li>Po zakończeniu blendowania:</li>
+			<ul>
+			<li>Tworzone jest nowe okno, które zawiera wynikowy obrazek wyskalowany tak, aby mieścił się w pełni w oknie</li>
+			<li>Zmiana rozmiarów okna również wpływa na rozmiar obrazka - zawsze jest wyskalowany do okna</li>
+			<li>Podczas zmiany rozmiaru lub przesuwania okna ma nie być migotania (białego prześwitującego tła)</li>
+		
+		</ul>
+		</li>
+		<li><b>Wskazówki:</b>
+		<ul>
+			<li>DialogResult, MessageBoxButtons, MessageBoxIcon</li>
+			<li>ProgressBar, TrackBar, ...FileDialog</li>
+			<li>BackgroundWorker (i jego metody), Bitmap, Image as Bitmap, Color</li>
+			<li>FormBorderStyle, Graphics.CopyFromScreen, Thread.Sleep</li>	
+		</ul>
+		</li>
+		<li><b>Punktacja:</b>
+		<ul>
+			<li>Prawidłowy układ kontrolek, wczytywanie obrazków i skalowanie ich w kontrolce, obrazek początkowy z zasobów: 2 punkty<br />
+			<li>Tworzenie zrzutu ekranu (screenshot): 1 punkt</li>
+			<li>Poprawnie obsłużona operacja mieszania obrazów i wyświetlanie wyniku w nowym oknie: 2 punkty</li>
+			<li>Poprawnie obsłużona wielowątkowość i pasek postępu operacji: 3 punkty</li>
+		</ul>
+		</li>
+	</ul>
+	<h3>Funkcjonalność rozszerzona (zadanie domowe 4B):</h3>
+	<ul>
+		<li>Maksymalnie dwa procesy blendowania mogą dziać się równocześnie - przycisk "Perform Blending" ma przestać być aktywny, gdy działają już 2 procesy.</li>
+		<li>Dwa paski postępu pokazujące postępy odpowiedniej operacji. Jeżeli jakaś operacja się skończy, to "zwalnia" pasek postępu tzn. kolejna może go użyć. </li>
+		<li>Dana operacja ma skorzystać z pierwszego wolnego pasku postępu.</li>
+		<li>W nowym oknie tworzonym po procesie blendowania dostępne jest menu kontekstowe uruchamiane prawym przyciskiem myszy, które umożliwia:
+		<ul>
+			<li>1. Zapisanie stworzonej bitmapy na dysku</li>
+			<li>2. Dodanie jej do biblioteki obrazków (o tym za chwilę)</li>
+		</ul>
+		</li>
+		<li>Aplikacja ma sugerować nazwę dla zapisywanego pliku, w której zaszyty będzie numer, który to obrazek wygenerowany w danej sesji np. "image2.bmp"</li>
+		<li>Należy dodać funkcjonalność prostej biblioteki obrazków:</li>
+			<ul>
+			<li>Biblioteka jest kontrolką zadokowaną do lewej strony, której szerokość można zmieniać</li>
+			<li>Wyświetla obrazy jako miniaturki 150x150 pikseli</li>
+			<li>Dynamicznie dostosowuje liczbę kolumn, w których wyświetlane są obrazy w zależności od szerokości kontrolki: proszę zobaczyć przy rozszerzaniu głównego okna</li>
+			<li>Posiada pasek przewijania (Scrollbar)</li>
+			<li>Zna pełne ścieżki do obrazów na dysku</li>
+			<li>Zawartość biblioteki jest przechowywana w pliku *.xml w katalogu programu</li>
+			<li>Plik *.xml aktualizowany jest w momencie dowolnej zmiany zawartości: usunięcia lub dodania obrazka</li>
+			<li>Kliknięcie w miniaturkę w bibliotece powoduje zaznaczenie obrazka</li>
+			<li>Kliknięcie ponowne (w zaznaczony obrazek) powoduje jego odznaczenie. Można ignorować bardzo szybkie podwójne kliknięcia.</li>
+			<li>Kliknięcie w kontrolkę ładowania obrazów w momencie gdy zaznaczony jest obrazek w bibliotece powoduje ustawienie go jako obrazka na kontrolce (zamiast dialogu nowego pliku)</li>
+			<li>Wciśnięcie przycisku "delete" w momencie gdy zaznaczony jest obrazek w bibliotece powoduje usunięcie go z biblioteki</li>
+			<li>Po usunięciu, obrazki w bibliotece powinny się odpowiednio przesunąć => brak pustego miejsca</li>
+			<li>Obrazki, które zostały usunięte z dysku (ściężka przestała być poprawna) nie są ładowane do biblioteki po ponownym uruchomieniu programu</li>
+			<li>Obrazek do biblioteki można dodać przy pomocy "drag and drop" z dysku twardego</li>
+			<li>Należy obsłużyć możliwość zaznaczenia wielu obrazków i dodania jednym przeciągnięciem drag&drop</li>
+			<li>Należy ignorować duplikaty tzn. obrazki o tych samych ścieżkach na dysku</li>
+			<li>Jak już wspomniano, obbrazek do biblioteki można również dodać z menu kontekstowego w nowym oknie po zakończeniu blendowania</li>
+			<li>W powyższym przypadku automatycznie obrazek zapisywany jest na dysku, jeżeli jeszcze nie istnieje (pod unikalną, niekolidującą nazwą)</li>
+			
+			
+					</ul>
+	<li><b>Punktacja:</b>
+		<ul>
+			<li>Funkcjonalność części laboratoryjnej: 1 punkt</li>
+			<li>Możliwość zapisania wynikowej bitmapy na dysk i odpowiednia sugerowana nazwa: 1 punkt </li>
+			<li>Poprawne obsługiwanie równoległych pasków postępu: 2 punkt</li>
+			<li>Poprawne wyświetlanie biblioteki obrazków, w tym scrollbar i ułożenie elementów: 2 punkty</li>
+			<li>Zaznaczanie obrazków w bibliotece i ustawianie ich na kontrolkach do blendowania: 2 punkty</li>
+			<li>Dodawanie do (w tym drag&drop) i usuwanie obrazków z biblioteki: 2 punkty</li>
+			<li>Wczytywanie i zapis zawartości do pliku *xml: 2 punkty</li>
+		</ul>
+		</li>
+	</ul>
+
+	

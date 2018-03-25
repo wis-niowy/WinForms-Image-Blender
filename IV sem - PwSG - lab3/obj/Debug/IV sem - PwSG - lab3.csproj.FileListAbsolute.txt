@@ -1,0 +1,10 @@
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\bin\Debug\IV sem - PwSG - lab3.exe.config
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV sem - PwSG - lab3.csprojResolveAssemblyReference.cache
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV_sem___PwSG___lab3.Form1.resources
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV sem - PwSG - lab3.csproj.GenerateResource.Cache
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\bin\Debug\IV sem - PwSG - lab3.exe
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\bin\Debug\IV sem - PwSG - lab3.pdb
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV_sem___PwSG___lab3.Properties.Resources.resources
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV sem - PwSG - lab3.exe
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV sem - PwSG - lab3.pdb
+C:\Users\Wisienka\Documents\Visual Studio 2015\Projects\IV sem - PwSG - lab4 WinForms\IV sem - PwSG - lab3\obj\Debug\IV_sem___PwSG___lab3.Form2.resources
